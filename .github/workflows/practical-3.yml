@@ -1,0 +1,66 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(ProductApp());
+}
+
+class ProductApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Product List",
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: ProductListScreen(),
+    );
+  }
+}
+
+class ProductListScreen extends StatelessWidget {
+  // Sample product data
+  final List<Map<String, dynamic>> products = [
+    {"name": "Laptop", "price": 75000},
+    {"name": "Smartphone", "price": 30000},
+    {"name": "Headphones", "price": 2000},
+    {"name": "Keyboard", "price": 1500},
+    {"name": "Mouse", "price": 1000},
+    {"name": "Smartwatch", "price": 8000},
+    {"name": "Monitor", "price": 12000},
+    {"name": "Tablet", "price": 25000},
+    {"name": "Speakers", "price": 3500},
+    {"name": "Power Bank", "price": 1200},
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Product List"),
+      ),
+      body: ListView.builder(
+        itemCount: products.length,
+        itemBuilder: (context, index) {
+          return Card(
+            margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.blue.shade100,
+                child: Icon(Icons.shopping_bag, color: Colors.blue),
+              ),
+              title: Text(
+                products[index]["name"],
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text("₹${products[index]["price"]}"),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
